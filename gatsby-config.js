@@ -4,17 +4,19 @@ module.exports = {
     title: 'Joopal Coin',
   },
 
-  plugins: [
+  plugins: (true ? [
     'gatsby-plugin-react-helmet',
 
+  ] : []).concat(process.env.NODE_ENV === "production" ? [
     { resolve: 'gatsby-plugin-google-analytics', 
       options: {
         trackingId: 'UA-102620770-2',
       }, }, // gatsby-plugin-google-analytics
 
+  ] : []).concat([
     'gatsby-plugin-styled-components',
 
-    { resolve: 'gatsby-plugin-manifest', // NOTE: place before `offline`,
+    { resolve: 'gatsby-plugin-manifest', // NOTE: place before `gatsby-plugin-offline`,
       options: {
         name:             'Joopal Coin',
         short_name:       'joopal-coin',
@@ -123,6 +125,6 @@ module.exports = {
         //skipWaiting: false,
       //},
     }, // gatsby-plugin-offline
+  ])
 
-  ],
 }
